@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/custom.18d3a4a7.css">
+
+<script src="/custom.18d3a4a7.js"></script></head>
+
+<body>
+
+
+    <header class="container header">
+        <div class="row">
+            <img src="/logo.b4d54dec.svg" class="header__logo" alt="Les petits plats logo">
+        </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <form class="form-search ">
+                <input id="input-search" type="search" class="form-control form-grey" placeholder="Search an ingredient, device, ustensil or a recipe">
+                <img class="search" src="/search.f4cade3d.svg" alt="">
+            </form>
+        </div>
+        <div id="container-tags">
+
+
+
+        </div>
+        <div class="container-search">
+            <!-- blue search -->
+            <!-- Ingredients input + dropdown -->
+            <div class="col-search">
+                <div class="input-group mb-3 ingredients">
+                    <input id="input-ingredients" placeholder="Ingredients" type="text" class="form-control form-blue" aria-label="Text input with dropdown button">
+                    <button id="form-btn-blue" class="btn btn-primary arrow-down form-btn-blue " type="button" data-bs-toggle="dropdown" aria-expanded="false"><a><img src="/arrow-down.d526b5f3.svg" alt=""></a></button>
+                    <ul id="dropdown-ingredients" class="dropdown-menu dropdown-menu-end">
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- green search -->
+            <!-- Device input + dropdown -->
+            <div class="">
+                <div class="input-group mb-3 device">
+                    <input id="input-device" placeholder="Device" type="text" class="form-control form-green " aria-label="Text input with dropdown button">
+                    <button class="btn btn-success arrow-down form-btn-green" type="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/arrow-down.d526b5f3.svg" alt=""></button>
+                    <ul id="dropdown-device" class="dropdown-menu dropdown-menu-end">
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- orange search -->
+            <!-- Ustensils input + dropdown -->
+            <div class="">
+                <div class="input-group mb-3 ustensils">
+                    <input id="input-ustensils" placeholder="Ustensils" type="text" class="form-control form-orange" aria-label="Text input with dropdown button">
+                    <button class="btn btn-outline-secondary form-btn-orange arrow-down" type="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/arrow-down.d526b5f3.svg" alt=""></button>
+                    <ul id="dropdown-ustensils" class="dropdown-menu dropdown-menu-end">
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" id="cards"></div>
+    </main>
+
+
+    <script src="/script.75da7f30.js"></script>
+    <!-- <script src="./script.js"></script> -->
+</body>
+
+</html>
