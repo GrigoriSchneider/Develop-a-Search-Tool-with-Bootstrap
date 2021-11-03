@@ -1660,7 +1660,7 @@ const recipesjson = {
             "servings": 4,
             "ingredients": [
                 {
-                    "ingredient": "Bananas",
+                    "ingredient": "Banana",
                     "quantity": 2
                 },
                 {

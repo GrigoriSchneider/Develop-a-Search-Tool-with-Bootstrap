@@ -9,9 +9,9 @@ let dropdownDevice = document.getElementById('dropdown-device');
 let dropdownUstensils = document.getElementById('dropdown-ustensils');
 let containerTags = document.getElementById('container-tags');
 
-
-
 const recipes = recipesjson.recipes;
+
+
 
 // tagsarray 
 let tagsArray = [];
@@ -28,6 +28,8 @@ let ustensils = [];
 let showUstensils = [];
 // showReceps
 let showRecepsArray = [];
+
+let recipesToShowFromID = [];
 
 // Filter Inputs
 let inputSearch = document.getElementById('input-search');
@@ -107,7 +109,7 @@ function recipesCardsHtml() {
             ustensils.push(ustensil[k]);
         }
     }
-    cards.innerHTML = html;
+
 
 
 
@@ -142,6 +144,7 @@ function filterArrayUnique(array, newArray) {
 function recipesDropdown() {
     filterArrayUnique(ingredients, showIngredients);
 
+
     let html = "";
 
 
@@ -154,6 +157,8 @@ function recipesDropdown() {
     // reset Arrays
     ingredients = [];
     showIngredients = [];
+
+    console.log(tagsArray)
 
 }
 recipesDropdown();
@@ -210,8 +215,9 @@ inputIngredients.addEventListener('blur', () => {
     dropdownIngredients.className = 'dropdown-menu-end dropdown-menu';
 });
 
-// recipesDropdown
+// ingredientsDropdown
 function ingredientsDropdown(filteredArray) {
+    console.log('hier ingredientsDropdown' + filteredArray)
 
 
     let html = "";
@@ -250,6 +256,7 @@ window.replyForFilterTags = function (addtoArray) {
 // remove Filtertags
 window.removeFromTagsArray = function (index) {
     tagsArray.splice(index, 1);
+    console.log(tagsArray);
 
     let html = '';
     for (let i = 0; i < tagsArray.length; i++) {
@@ -261,42 +268,78 @@ window.removeFromTagsArray = function (index) {
 
 }
 
+
+
 function filterRecipes() {
-    let ingredientsFromID = [];
+
 
 
     let counterHideCards = 1;
 
-    for (var i = 0; i < recipes.length; i++) {
+    for (let recipeID in recipes) {
+        let ingredients = recipes[recipeID].ingredients
 
-        let recipesId = recipes[i].id;
-        let allIngredients = recipes[i].ingredients;
 
         // all card get class hide
         document.getElementById(counterHideCards).className = 'card hide';
 
-        counterHideCards += 1;
+        for (let number in ingredients) {
+            // console.log(ingredients[number].ingredient)
+            for (let tagNumber in tagsArray) {
 
-        for (var j = 0; j < allIngredients.length; j++) {
-            for (var k = 0; k < tagsArray.length; k++) {
-                // only show recipes with the right incredient
-                if (tagsArray[k].toLowerCase() === allIngredients[j].ingredient.toLowerCase()) {
+                if (tagsArray[tagNumber] === ingredients[number].ingredient) {
+                    // remove class hide
+                    document.getElementById(counterHideCards).className = 'card ';
 
-                    // Array for the new ingredients <li></li>
-                    ingredientsFromID.push(recipesId);
-                    // Remove class hide
-                    document.getElementById(recipesId).className = 'card ';
+
+                    // Push recipes ID to 
+                    recipesToShowFromID.push(recipeID);
+                    // console.log(recipeID);
                 }
+
             }
+
         }
+
+        counterHideCards++
     }
-    createForLiArray(ingredientsFromID)
+
+    // for (var i = 0; i < recipes.length; i++) {
+
+    //     let recipesId = recipes[i].id;
+    //     let allIngredients = recipes[i].ingredients;
+
+    //     // all card get class hide
+    //     document.getElementById(counterHideCards).className = 'card hide';
+
+    //     counterHideCards += 1;
+
+    //     for (var j = 0; j < allIngredients.length; j++) {
+    //         for (var k = 0; k < tagsArray.length; k++) {
+    //             // only show recipes with the right incredient
+    //             if (tagsArray[k].toLowerCase() === allIngredients[j].ingredient.toLowerCase()) {
+
+    //                 // Array for the new ingredients <li></li>
+    //                 recipesToShowFromID.push(recipesId);
+    //                 // Remove class hide
+    //                 document.getElementById(recipesId).className = 'card ';
+    //             }
+    //         }
+    //     }
+    // }
+
+
+    createForLiArray(recipesToShowFromID)
+
+    // reset array recipesToShowFromID 
+    recipesToShowFromID = [];
 }
 
 function createForLiArray(arrayIds) {
 
     // arrayIds ingredients still available for choice
     for (let i = 0; i < arrayIds.length; i++) {
+
         let ingredient = recipes[arrayIds[i]].ingredients;
 
         for (let j = 0; j < ingredient.length; j++) {
@@ -307,13 +350,10 @@ function createForLiArray(arrayIds) {
             if (ingredient[j].ingredient === undefined) {
                 console.log(j);
             } else {
+
                 ingredients.push(ingredient[j].ingredient);
                 // console.log(ingredient[j].ingredient);
             }
-
-            ingredients.push(ingredient[j].ingredient);
-
-
         }
     }
     // console.log(ingredients);

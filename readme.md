@@ -3,10 +3,9 @@
     a recepe site with 50 receps build with 
     -Html
     -Javascript 
-    -Sass
-    -Bootstrap
-    -parcel as buil environment
-    
+    -Sass Bootstrap
+    -parcel as build environment
+
 
 // InnerHtml for cards
 function recipesCardsHtml()
@@ -17,6 +16,8 @@ function filterArrayUnique(array, newArray)
 // ingredientsDropdown
 function ingredientsDropdown()
 
+// 
+function filterRecipes()
 
 <!-- Arrays -->
 // tagsarray 

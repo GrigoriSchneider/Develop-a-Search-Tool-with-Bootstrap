@@ -178,7 +178,9 @@ input#input-device:focus {
   
 // Device dropdown
 
-#dropdown-device.dropdown-menu.show{
+#dropdown-device.dropdown-menu-end.dropdown-menu.show{
+    position: absolute;
+    transform: translate3d(0px, 71px, 0px);
     background-color: $color-green;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -244,7 +246,7 @@ input#input-ustensils:focus {
 
     .card{
         width: 415px;
-        height: 365px;
+        height: 400px;
         padding: 0;
         margin-bottom: 50px;
         
@@ -258,6 +260,7 @@ input#input-ustensils:focus {
         &-row{
             display: flex;
             justify-content: space-between;
+            overflow: hidden;
         }
 
         &-description{
@@ -275,6 +278,7 @@ input#input-ustensils:focus {
         }
         .col{
             padding: 0;
+            word-wrap: break-word;
         }
         .time{
             display: flex;
@@ -303,4 +307,9 @@ input#input-ustensils:focus {
             background-color: darken($color-blue, 10%);
         }
     }
+}
+
+// Error Message
+#error-message{
+    display: grid;
 }
