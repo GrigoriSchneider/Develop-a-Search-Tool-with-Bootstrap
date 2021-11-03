@@ -1598,20 +1598,71 @@ ustensilsObject.forEach(function (ustensil) {
   htmlUstensil += "<li id=\"ustensil-li-".concat(ustensil.id, "\"><a class=\"dropdown-item\" href=\"#\">").concat(ustensil.ustensil, "</a></li>");
 });
 dropdownUstensils.innerHTML = htmlUstensil;
-},{"./recipes.js":"recipes.js"}],"test.js":[function(require,module,exports) {
+},{"./recipes.js":"recipes.js"}],"version2.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.inputSearch = void 0;
+
+var _recipes = require("./recipes.js");
+
+var _test = require("./test.js");
+
+var inputSearch = document.getElementById('input-search');
+exports.inputSearch = inputSearch;
+var recipes = _recipes.recipesjson.recipes;
+var errorMessage = document.getElementById('error-message');
+inputSearch.addEventListener('keyup', function (e) {
+  e.preventDefault();
+  var searchString = inputSearch.value.toLowerCase();
+  var liShowArray = [];
+
+  for (var number in recipes) {
+    var name = recipes[number].name.toLowerCase();
+    var id = recipes[number].id;
+    var description = recipes[number].description.toLowerCase(); // console.log('name:', name, 'id:', id)
+
+    if (searchString.length >= 3) {
+      // console.log('name includes Searchstring:', name.includes(searchString))
+      // check recipes name
+      if (name.includes(searchString)) {
+        document.getElementById(id).classList.remove('hide');
+        liShowArray.push(id); // check recipes description
+      } else if (description.includes(searchString)) {
+        document.getElementById(id).classList.remove('hide');
+        liShowArray.push(id);
+      } else {
+        document.getElementById(id).classList.add('hide');
+      }
+    }
+
+    if (searchString.length >= 3) {
+      if (liShowArray.length == 0) {
+        errorMessage.firstElementChild.classList.remove('hide');
+      } else {
+        errorMessage.firstElementChild.classList.add('hide');
+      }
+    }
+
+    (0, _test.liShow)(liShowArray);
+  }
+});
+},{"./recipes.js":"recipes.js","./test.js":"test.js"}],"test.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.liShow = liShow;
-exports.ingredientsObject = void 0;
 
 var _recipes = require("./recipes.js");
 
 var _object = require("./object.js");
 
-// import { inputSearch } from './version2.js';
+var _version = require("./version2.js");
+
 var recipes = _recipes.recipesjson.recipes; // DOM
 
 var cards = document.getElementById('cards');
@@ -1619,8 +1670,8 @@ var dropdownIngredients = document.getElementById('dropdown-ingredients');
 var dropdownDevice = document.getElementById('dropdown-device');
 var dropdownUstensils = document.getElementById('dropdown-ustensils');
 var containerTags = document.getElementById('container-tags'); // Filter Inputs
+// let inputSearch = document.getElementById('input-search')
 
-var inputSearch = document.getElementById('input-search');
 var inputIngredients = document.getElementById('input-ingredients');
 var inputDevice = document.getElementById('input-device');
 var inputUstensils = document.getElementById('input-ustensils'); // Error-message
@@ -1695,8 +1746,6 @@ var ingredientsObject = ingredientsArray.map(function (ingredient, index) {
   return properties;
 }); // console.log(ingredientsObject)
 
-exports.ingredientsObject = ingredientsObject;
-
 function ingredientsObjectIDs() {
   ingredientsObject.forEach(function (li) {
     var liIngredient = li.ingredient;
@@ -1720,10 +1769,9 @@ function ingredientsObjectIDs() {
   });
 }
 
-ingredientsObjectIDs(); // export for version 2
-
-// console.log(ingredientsObject)
+ingredientsObjectIDs(); // console.log(ingredientsObject)
 // Ingredients dropdown
+
 function ingredientsDropdown() {
   var html = "";
   ingredientsObject.forEach(function (ingredient) {
@@ -2002,44 +2050,45 @@ function ingredientSearch(liShowArray) {
   });
 } ///////////////////////////////////////////////////////////////
 // Main search
+// inputSearch.addEventListener('keyup', (e) => {
+//     e.preventDefault()
+//     let searchString = inputSearch.value.toLowerCase()
+//     console.log(searchString)
+//     let liShowArray = []
+//     recipes.forEach((recipes) => {
+//         let name = recipes.name.toLocaleLowerCase()
+//         let id = recipes.id
+//         let description = recipes.description.toLowerCase()
+//         // console.log(description.indexOf(searchString) == -1)
+//         if (searchString.length >= 3) {
+//             // console.log(name)
+//             // console.log(name.includes(searchString))
+//             if (name.includes(searchString)) {
+//                 document.getElementById(id).classList.remove('hide')
+//                 liShowArray.push(id)
+//             } else if (description.includes(searchString)) {
+//                 document.getElementById(id).classList.remove('hide')
+//                 liShowArray.push(id)
+//             }
+//             else {
+//                 document.getElementById(id).classList.add('hide')
+//             }
+//         }
+//         if (liShowArray.length == 0) {
+//             errorMessage.firstElementChild.classList.remove('hide')
+//         } else {
+//             errorMessage.firstElementChild.classList.add('hide')
+//         }
+//     })
+//     console.log(liShowArray)
+//     liShow(liShowArray)
+// })
 
 
-inputSearch.addEventListener('keyup', function (e) {
-  e.preventDefault();
-  var searchString = inputSearch.value.toLowerCase();
-  console.log(searchString);
-  var liShowArray = [];
-  recipes.forEach(function (recipes) {
-    var name = recipes.name.toLocaleLowerCase();
-    var id = recipes.id;
-    var description = recipes.description.toLowerCase(); // console.log(description.indexOf(searchString) == -1)
-
-    if (searchString.length >= 3) {
-      // console.log(name)
-      // console.log(name.includes(searchString))
-      if (name.includes(searchString)) {
-        document.getElementById(id).classList.remove('hide');
-        liShowArray.push(id);
-      } else if (description.includes(searchString)) {
-        document.getElementById(id).classList.remove('hide');
-        liShowArray.push(id);
-      } else {
-        document.getElementById(id).classList.add('hide');
-      }
-    }
-
-    if (liShowArray.length == 0) {
-      errorMessage.firstElementChild.classList.remove('hide');
-    } else {
-      errorMessage.firstElementChild.classList.add('hide');
-    }
-  });
-  console.log(liShowArray);
-  liShow(liShowArray);
-});
-inputSearch.addEventListener('blur', function () {}); //////////////////////////////////////////////////////////////////////////
+_version.inputSearch.addEventListener('blur', function () {}); //////////////////////////////////////////////////////////////////////////
 // Device
 // Add event listener to <li>device</li>
+
 
 _object.deviceObject.forEach(function (devices) {
   var liID = "device-li-" + [devices.id];
@@ -2126,7 +2175,7 @@ inputUstensils.addEventListener('keyup', function (e) {
 inputUstensils.addEventListener('blur', function () {
   dropdownUstensils.className = 'dropdown-menu-end dropdown-menu';
 });
-},{"./recipes.js":"recipes.js","./object.js":"object.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./recipes.js":"recipes.js","./object.js":"object.js","./version2.js":"version2.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

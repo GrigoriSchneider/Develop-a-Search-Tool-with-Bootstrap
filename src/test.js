@@ -2,7 +2,7 @@
 
 import { recipesjson } from './recipes.js'
 import { deviceObject, ustensilsObject } from './object.js';
-// import { inputSearch } from './version2.js';
+import { inputSearch } from './version2.js';
 
 
 const recipes = recipesjson.recipes;
@@ -15,7 +15,7 @@ let dropdownUstensils = document.getElementById('dropdown-ustensils');
 let containerTags = document.getElementById('container-tags');
 
 // Filter Inputs
-let inputSearch = document.getElementById('input-search')
+// let inputSearch = document.getElementById('input-search')
 let inputIngredients = document.getElementById('input-ingredients')
 let inputDevice = document.getElementById('input-device')
 let inputUstensils = document.getElementById('input-ustensils')
@@ -135,8 +135,7 @@ function ingredientsObjectIDs() {
 
 
 ingredientsObjectIDs()
-// export for version 2
-export { ingredientsObject }
+
 // console.log(ingredientsObject)
 
 // Ingredients dropdown
@@ -465,48 +464,48 @@ function ingredientSearch(liShowArray) {
 ///////////////////////////////////////////////////////////////
 // Main search
 
-inputSearch.addEventListener('keyup', (e) => {
-    e.preventDefault()
-    let searchString = inputSearch.value.toLowerCase()
-    console.log(searchString)
-    let liShowArray = []
+// inputSearch.addEventListener('keyup', (e) => {
+//     e.preventDefault()
+//     let searchString = inputSearch.value.toLowerCase()
+//     console.log(searchString)
+//     let liShowArray = []
 
-    recipes.forEach((recipes) => {
-        let name = recipes.name.toLocaleLowerCase()
-        let id = recipes.id
-        let description = recipes.description.toLowerCase()
-        // console.log(description.indexOf(searchString) == -1)
+//     recipes.forEach((recipes) => {
+//         let name = recipes.name.toLocaleLowerCase()
+//         let id = recipes.id
+//         let description = recipes.description.toLowerCase()
+//         // console.log(description.indexOf(searchString) == -1)
 
-        if (searchString.length >= 3) {
-            // console.log(name)
-            // console.log(name.includes(searchString))
-            if (name.includes(searchString)) {
-                document.getElementById(id).classList.remove('hide')
-                liShowArray.push(id)
-
-
-
-            } else if (description.includes(searchString)) {
-                document.getElementById(id).classList.remove('hide')
-                liShowArray.push(id)
-            }
-            else {
-                document.getElementById(id).classList.add('hide')
-            }
-        }
-
-        if (liShowArray.length == 0) {
-            errorMessage.firstElementChild.classList.remove('hide')
-        } else {
-            errorMessage.firstElementChild.classList.add('hide')
-        }
-    })
+//         if (searchString.length >= 3) {
+//             // console.log(name)
+//             // console.log(name.includes(searchString))
+//             if (name.includes(searchString)) {
+//                 document.getElementById(id).classList.remove('hide')
+//                 liShowArray.push(id)
 
 
-    console.log(liShowArray)
-    liShow(liShowArray)
 
-})
+//             } else if (description.includes(searchString)) {
+//                 document.getElementById(id).classList.remove('hide')
+//                 liShowArray.push(id)
+//             }
+//             else {
+//                 document.getElementById(id).classList.add('hide')
+//             }
+//         }
+
+//         if (liShowArray.length == 0) {
+//             errorMessage.firstElementChild.classList.remove('hide')
+//         } else {
+//             errorMessage.firstElementChild.classList.add('hide')
+//         }
+//     })
+
+
+//     console.log(liShowArray)
+//     liShow(liShowArray)
+
+// })
 
 inputSearch.addEventListener('blur', () => {
 

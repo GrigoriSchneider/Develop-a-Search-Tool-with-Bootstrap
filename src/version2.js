@@ -1,5 +1,5 @@
 import { recipesjson } from './recipes.js'
-import { ingredientsObject, liShow } from './test.js'
+import { liShow } from './test.js'
 
 let inputSearch = document.getElementById('input-search')
 const recipes = recipesjson.recipes;
@@ -15,11 +15,11 @@ inputSearch.addEventListener('keyup', (e) => {
         let name = recipes[number].name.toLowerCase()
         let id = recipes[number].id
         let description = recipes[number].description.toLowerCase()
-        console.log('name:', name, 'id:', id)
+        // console.log('name:', name, 'id:', id)
 
 
         if (searchString.length >= 3) {
-            console.log('name includes Searchstring:', name.includes(searchString))
+            // console.log('name includes Searchstring:', name.includes(searchString))
             // check recipes name
             if (name.includes(searchString)) {
                 document.getElementById(id).classList.remove('hide')
