@@ -15,7 +15,7 @@ inputSearch.addEventListener('keyup', (e) => {
         let name = recipes[number].name.toLowerCase()
         let id = recipes[number].id
         let description = recipes[number].description.toLowerCase()
-        console.log('name:', name, 'id:', id)
+        // console.log('name:', name, 'id:', id)
 
 
         if (searchString.length >= 3) {

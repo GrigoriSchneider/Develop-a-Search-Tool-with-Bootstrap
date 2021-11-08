@@ -92,7 +92,7 @@ function createIngredientsArray() {
             }
         })
     )
-    // console.log(ingredientsArray)
+    console.log(ingredientsArray)
 }
 createIngredientsArray()
 
